@@ -5,7 +5,7 @@ using SalesService.Services;
 
 namespace SalesService.Controllers;
 
-[Authorize]
+// [Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class OrderController : ControllerBase
