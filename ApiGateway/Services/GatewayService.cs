@@ -41,15 +41,29 @@ public class GatewayService
         try
         {
             var response = await client.ExecuteAsync(restRequest);
+
             if (response.IsSuccessful)
-                return new Response { Success = true, Data = JsonSerializer.Deserialize<object>(response.Content) };
-            else
-                return new Response { Success = false, ErrorMessage = response.ErrorMessage };
+                return new Response
+                {
+                    Success = true,
+                    Data = JsonSerializer.Deserialize<object>(response.Content)
+                };
+
+            return new Response
+            {
+                Success = false,
+                ErrorMessage = response.ErrorMessage
+            };
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error routing request to {Service}", request.Service);
-            return new Response { Success = false, ErrorMessage = ex.Message };
+
+            return new Response
+            {
+                Success = false,
+                ErrorMessage = ex.Message
+            };
         }
     }
 }
